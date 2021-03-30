@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState, useEffect} from 'react';
+import ListItem from './Components/ListItem';
+import axios from 'axios';
 
-function App() {
+const App = () => {
+  const [catFacts, setCatFacts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('https://cat-fact.herokuapp.com/facts')
+      .then(res => {
+        setCatFacts(res.data)
+      })
+      
+      return () => {
+        console.log('goodbye')
+      }
+    }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ListItem catFacts={catFacts}/>
     </div>
   );
-}
+};
 
 export default App;
