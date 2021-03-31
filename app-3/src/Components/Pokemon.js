@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
 const Pokemon = (props) => {
+  console.log(props)
   const {name} = props.match.params;
   const [pokemon, setPokemon] = useState({});
 
@@ -15,7 +16,7 @@ const Pokemon = (props) => {
   return(
     <div>
       <h1>{pokemon.name}</h1>
-      <img alt={pokemon.name} src={pokemon.url} />
+      <img alt={pokemon.name} src={pokemon.sprites?.back_shiny} />
     </div>
   )
 }

@@ -11,18 +11,24 @@ const PokemonList = (props) => {
     axios
       .get('https://pokeapi.co/api/v2/pokemon')
       .then((res) => {
-        setList(res.data)
+        setList(res.data.results)
       })
     }, [])
 
   
+  
   return(
     <div>
-      {list.map((item, index) => {
-        return(
-          <Link to={`/${item.name}`} key={index}>{item.name}</Link>
-        )
-      })}
+      <p>Pokemon list</p>
+        {list.map((pokemon) => {
+          return(
+            <Link to={`/pokemon/${pokemon.name}`} key={pokemon.url}>
+              <h2>
+                {pokemon.name}
+              </h2>
+            </Link>
+          )
+        })}
     </div>
   )
 
